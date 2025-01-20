@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	_ "fmt"
 	"log"
 	"net/http"
+	"strconv"
 	_ "strconv"
 )
 
@@ -15,7 +17,14 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func showSnippet(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Показать все сниппеты"))
+
+	id, err := strconv.Atoi(r.URL.Query().Get("id"))
+	if err != nil || id < 1 {
+		http.NotFound(w, r)
+		return
+	}
+
+	fmt.Fprintf(w, "Отображение выбранной заметки с ID %d", id)
 }
 
 func createSnippet(w http.ResponseWriter, r *http.Request) {
