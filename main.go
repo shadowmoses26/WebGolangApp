@@ -1,10 +1,10 @@
 package main
 
 import (
+	_ "fmt"
 	"log"
-	_ "log"
 	"net/http"
-	_ "net/http"
+	_ "strconv"
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
